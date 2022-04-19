@@ -9,6 +9,7 @@
     tools:context=".LoginActivity">
 
     <ImageView
+        android:id="@+id/logo"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginLeft="155dp"
@@ -22,7 +23,7 @@
         android:layout_marginTop="62dp"
         android:fontFamily="@font/montserrat_black"
         android:lineHeight="36px"
-        android:text="Iniciar sesion"
+        android:text="Bienvenido de nuevo"
         android:textAlignment="center"
         android:textColor="#ED1BA3"
         android:textSize="24dp" />
@@ -36,25 +37,44 @@
             android:id="@+id/btnAccder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="68dp"
+            android:textColor="@color/white"
             android:background="@drawable/round_btn"
             android:fontFamily="@font/montserrat_black"
-            android:layout_marginTop="68dp"
-            android:layout_marginLeft="60dp"
-            android:text="Iniciar Sesion"
             android:paddingHorizontal="50dp"
-            android:textSize="20dp" />
+            android:text="Iniciar Sesion"
+            android:textSize="20dp"
+            app:strokeColor="@color/purple_500"
+            app:strokeWidth="2dp" />
 
         <Button
+            android:id="@+id/btnRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#0000"
-            android:text="Registarse"
+            android:background="@drawable/out_line_btn"
+            android:text="Registrarse"
             android:textSize="20dp"
+            android:textColor="@color/white"
             android:fontFamily="@font/montserrat_black"
             android:layout_marginLeft="60dp"
-            android:paddingHorizontal="50dp"
+            android:paddingHorizontal="60dp"
             android:layout_marginTop="51dp"
             />
+
+        <Button
+            android:id="@+id/btnOlvide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/transparent"
+            android:fontFamily="@font/montserrat_light"
+            android:text="Olvide mi contraseña"
+            android:textAllCaps="false"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="100dp"
+            android:textColor="@color/purple_500"
+            android:textSize="15dp" />
+
     </LinearLayout>
 
 </LinearLayout>
