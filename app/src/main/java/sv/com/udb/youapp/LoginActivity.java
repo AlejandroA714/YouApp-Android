@@ -2,19 +2,20 @@ package sv.com.udb.youapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import sv.com.udb.youapp.databinding.ActivityLoginBinding;
+
 public class LoginActivity extends AppCompatActivity {
 
-    //Hooks
-    ImageView logo;
-    TextView title1;
-    Button btnAccder, btnReg, btnOlvi;
+    private ActivityLoginBinding binding;
 
     //Animation
     Animation topAnimation, middleAnimation;
@@ -24,20 +25,24 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         topAnimation = AnimationUtils.loadAnimation(this, R.anim.top_animation);
         middleAnimation = AnimationUtils.loadAnimation(this, R.anim.middle_animation);
 
-        logo = findViewById(R.id.logo);
-        title1 = findViewById(R.id.title1);
-        btnAccder = findViewById(R.id.btnAccder);
-        btnOlvi = findViewById(R.id.btnOlvide);
-        btnReg = findViewById(R.id.btnRegister);
+        binding.btnOlvide.setOnClickListener(this::btnOlvideListener);
 
-        logo.setAnimation(topAnimation);
-        title1.setAnimation(middleAnimation);
-        btnAccder.setAnimation(middleAnimation);
-        btnOlvi.setAnimation(middleAnimation);
-        btnReg.setAnimation(middleAnimation);
+        binding.logo.setAnimation(topAnimation);
+        binding.title1.setAnimation(middleAnimation);
+        binding.btnAccder.setAnimation(middleAnimation);
+        binding.btnOlvide.setAnimation(middleAnimation);
+        binding.btnRegister.setAnimation(middleAnimation);
 
+    }
+
+    private void btnOlvideListener(View view){
+        Intent i = new Intent(this, ForgetPasswordActivity.class);
+        startActivity(i);
     }
 }

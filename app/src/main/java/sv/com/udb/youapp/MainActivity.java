@@ -12,13 +12,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import sv.com.udb.youapp.databinding.ActivityLoginBinding;
+import sv.com.udb.youapp.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
 
     private static int SPLASH_TIME_OUT = 5000;
 
-    //Hooks
-    View logo;
-    TextView title1, title2;
+    private ActivityMainBinding binding;
 
     //Animations
     Animation topAnimation, bottomAnimation, middleAnimation;
@@ -29,17 +30,16 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         topAnimation = AnimationUtils.loadAnimation(this, R.anim.top_animation);
         bottomAnimation = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
         middleAnimation = AnimationUtils.loadAnimation(this, R.anim.middle_animation);
 
-        logo = findViewById(R.id.logo);
-        title1 = findViewById(R.id.title1);
-        title2 = findViewById(R.id.title2);
-
-        logo.setAnimation(topAnimation);
-        title1.setAnimation(middleAnimation);
-        title2.setAnimation(bottomAnimation);
+        binding.logo.setAnimation(topAnimation);
+        binding.title1.setAnimation(middleAnimation);
+        binding.title2.setAnimation(bottomAnimation);
 
         //Splash Screen
         new Handler().postDelayed(new Runnable() {

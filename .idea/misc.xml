@@ -5,8 +5,11 @@
       <map>
         <entry key="..\:/Users/matthew_ramos/AndroidStudioProjects/YouApp/app/src/main/res/drawable/out_line_btn.xml" value="0.1265" />
         <entry key="..\:/Users/matthew_ramos/AndroidStudioProjects/YouApp/app/src/main/res/drawable/round_btn.xml" value="0.207" />
+        <entry key="..\:/Users/matthew_ramos/AndroidStudioProjects/YouApp/app/src/main/res/layout/activity_forget_password.xml" value="0.2572463768115942" />
         <entry key="..\:/Users/matthew_ramos/AndroidStudioProjects/YouApp/app/src/main/res/layout/activity_login.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/matthew_ramos/AndroidStudioProjects/YouApp/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/matthew_ramos/AndroidStudioProjects/YouApp/app/src/main/res/layout/activity_password_update.xml" value="0.1671195652173913" />
+        <entry key="..\:/Users/matthew_ramos/AndroidStudioProjects/YouApp/app/src/main/res/layout/activity_register.xml" value="0.2572463768115942" />
       </map>
     </option>
   </component>
