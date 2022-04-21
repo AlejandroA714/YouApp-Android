@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">YouApp</string>
+    <string name="Title">YouApp</string>
+    <string name="brand">The Sound of life</string>
 </resources>

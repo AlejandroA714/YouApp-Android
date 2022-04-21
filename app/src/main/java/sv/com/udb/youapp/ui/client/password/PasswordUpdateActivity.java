@@ -1,4 +1,4 @@
-package sv.com.udb.youapp;
+package sv.com.udb.youapp.ui.client.password;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import sv.com.udb.youapp.databinding.ActivityLoginBinding;
+import sv.com.udb.youapp.R;
+import sv.com.udb.youapp.ui.LoginActivity;
+
 import sv.com.udb.youapp.databinding.ActivityPasswordUpdateBinding;
 
 

@@ -1,4 +1,4 @@
-package sv.com.udb.youapp;
+package sv.com.udb.youapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,10 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import sv.com.udb.youapp.ui.client.password.ForgetPasswordActivity;
+import sv.com.udb.youapp.R;
 import sv.com.udb.youapp.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
@@ -33,11 +32,11 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.btnOlvide.setOnClickListener(this::btnOlvideListener);
 
-        binding.logo.setAnimation(topAnimation);
-        binding.title1.setAnimation(middleAnimation);
-        binding.btnAccder.setAnimation(middleAnimation);
-        binding.btnOlvide.setAnimation(middleAnimation);
-        binding.btnRegister.setAnimation(middleAnimation);
+        //binding.logo.setAnimation(topAnimation);
+        //binding.title1.setAnimation(middleAnimation);
+        //binding.btnAccder.setAnimation(middleAnimation);
+        //binding.btnOlvide.setAnimation(middleAnimation);
+        //binding.btnRegister.setAnimation(middleAnimation);
 
     }
 
