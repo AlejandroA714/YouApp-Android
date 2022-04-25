@@ -1,77 +1,99 @@
 package sv.com.udb.youapp.ui;
 
-import androidx.annotation.Nullable;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import net.openid.appauth.AppAuthConfiguration;
-import net.openid.appauth.AuthState;
 import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationRequest;
 import net.openid.appauth.AuthorizationResponse;
 import net.openid.appauth.AuthorizationService;
 import net.openid.appauth.AuthorizationServiceConfiguration;
 import net.openid.appauth.ClientAuthentication;
-import net.openid.appauth.ClientSecretBasic;
 import net.openid.appauth.ClientSecretPost;
+import net.openid.appauth.Preconditions;
 import net.openid.appauth.ResponseTypeValues;
 import net.openid.appauth.TokenRequest;
 import net.openid.appauth.TokenResponse;
-import net.openid.appauth.browser.AnyBrowserMatcher;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
-import sv.com.udb.youapp.oauth.HttpConnectionBuilder;
+import sv.com.udb.youapp.auth.AuthStateManager;
+import sv.com.udb.youapp.auth.HttpConnectionBuilder;
+import sv.com.udb.youapp.auth.IAuthService;
+import sv.com.udb.youapp.auth.OAuth2AuthorizationService;
+import sv.com.udb.youapp.ui.client.home.HomeActivity;
 import sv.com.udb.youapp.ui.client.password.ForgetPasswordActivity;
 import sv.com.udb.youapp.R;
 import sv.com.udb.youapp.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String CLIENT_ID = "youapp";
-    private static final String AUTHORIZE_URI = "http://192.168.101.17:8083/oauth2/authorize";
-    private static final String TOKEN_URI = "http://192.168.101.17:8083/oauth2/token";
-    private static final String REDIRECT_URI = "youapp://oauth";
+
     private ActivityLoginBinding binding;
     private AuthorizationService authService;
-    private AuthState stateManager;
-
-    //Animation
-    Animation topAnimation, middleAnimation;
+    private AuthStateManager stateManager;
+    private ActivityResultLauncher<Intent> loginLauncher;
+    private IAuthService oAuth2Service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        AppAuthConfiguration appAuthConfiguration = new AppAuthConfiguration.Builder()
-                .setSkipIssuerHttpsCheck(true)
-                .setConnectionBuilder(HttpConnectionBuilder.INSTANCE).build();
-        authService = new AuthorizationService(this,appAuthConfiguration);
-
+        //Binding
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        topAnimation = AnimationUtils.loadAnimation(this, R.anim.top_animation);
-        middleAnimation = AnimationUtils.loadAnimation(this, R.anim.middle_animation);
-
+        //Listener
         binding.btnOlvide.setOnClickListener(this::btnOlvideListener);
         binding.btnAccder.setOnClickListener(this::btnLogin);
+        //Services
+        stateManager = AuthStateManager.getInstance(this);
+        oAuth2Service = new OAuth2AuthorizationService.Builder(getApplicationContext()).build();
+        //ActivityResult
+        loginLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                this::onLoginResult);
+    }
 
-        //binding.logo.setAnimation(topAnimation);
-        //binding.title1.setAnimation(middleAnimation);
-        //binding.btnAccder.setAnimation(middleAnimation);
-        //binding.btnOlvide.setAnimation(middleAnimation);
-        //binding.btnRegister.setAnimation(middleAnimation);
+    private void onLoginResult(ActivityResult result){
+        Intent intentResult = result.getData();
+        AuthorizationException exception = AuthorizationException.fromIntent(intentResult);
+        if(null != exception){
+            showToast(exception.getMessage());
+            return;
+        }
+        try{
+            AuthorizationResponse authResponse = AuthorizationResponse.fromIntent(intentResult);
+            Preconditions.checkNotNull(authResponse,"Unknown error");
+            oAuth2Service.exchangeAccessToken(authResponse.createTokenExchangeRequest(),
+               (TokenResponse response,AuthorizationException ex) -> {
+                if (null != response){
+                    stateManager.updateAfterTokenResponse(response,ex);
+                    showToast("Login Sucess!");
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    showToast(ex.getMessage());
+                }
+            });
+        }catch (Exception e){
+            showToast(e.getMessage());
+        }
+    }
 
+    private void showToast(String message){
+        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
     }
 
     private void btnOlvideListener(View view){
@@ -80,35 +102,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void btnLogin(View view){
-        AuthorizationServiceConfiguration authorizationServiceConfiguration = new AuthorizationServiceConfiguration(
-                Uri.parse(AUTHORIZE_URI),
-                Uri.parse(TOKEN_URI));
-        AuthorizationRequest authorizationRequest =  new AuthorizationRequest.Builder(
-                authorizationServiceConfiguration,
-                CLIENT_ID,
-                ResponseTypeValues.CODE,
-                Uri.parse(REDIRECT_URI))
-                .setScopes("openid","profile","email").build();
-        Intent authIntent = authService.getAuthorizationRequestIntent(authorizationRequest);
-        startActivityForResult(authIntent,100);
+        loginLauncher.launch(oAuth2Service.createRequestIntent());
     }
 
-    @Override
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
-            AuthorizationResponse resp = AuthorizationResponse.fromIntent(data);
-            AuthorizationException ex = AuthorizationException.fromIntent(data);
-            TokenRequest re = resp.createTokenExchangeRequest();
-            ClientAuthentication clientAuth = new ClientSecretPost("9d[?hr%[Y>w~nV3_");
-            authService.performTokenRequest(re,clientAuth,
-                    (TokenResponse response,AuthorizationException ex1) -> {
-                        System.out.println("Hola");
-             });
-        }
-
-    }
 
 }

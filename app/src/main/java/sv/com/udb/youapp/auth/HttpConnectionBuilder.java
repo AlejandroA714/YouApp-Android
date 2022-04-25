@@ -1,4 +1,4 @@
-package sv.com.udb.youapp.oauth;
+package sv.com.udb.youapp.auth;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
@@ -82,9 +82,7 @@ public final class HttpConnectionBuilder implements ConnectionBuilder {
         TRUSTING_CONTEXT = initializedContext;
     }
 
-    private HttpConnectionBuilder() {
-        // no need to construct new instances
-    }
+    private HttpConnectionBuilder() {}
 
     @NonNull
     @Override
