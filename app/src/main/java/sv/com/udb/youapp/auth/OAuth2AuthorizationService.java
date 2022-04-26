@@ -46,8 +46,8 @@ public final class OAuth2AuthorizationService implements IAuthService {
         private static final String REDIRECT_URI = "youapp://oauth";
         private static final String CLIENT_SECRET = "9d[?hr%[Y>w~nV3_";
         private static final String[] scopes = new String[]{"openid","profile","email"};
-        private static final String TOKEN_URI = "http://192.168.101.17:8083/oauth2/token";
-        private static final String AUTHORIZE_URI = "http://192.168.101.17:8083/oauth2/authorize";
+        private static final String TOKEN_URI = "http://192.168.0.24:8083/oauth2/token";
+        private static final String AUTHORIZE_URI = "http://192.168.0.24:8083/oauth2/authorize";
         private ClientAuthentication clientAuthentication = new ClientSecretPost(CLIENT_SECRET);
         private ConnectionBuilder connectionBuilder = HttpConnectionBuilder.INSTANCE;
         private AuthorizationServiceConfiguration authServiceConfiguration;

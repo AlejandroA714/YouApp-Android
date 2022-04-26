@@ -4,16 +4,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import sv.com.udb.youapp.R;
 import sv.com.udb.youapp.databinding.ActivityForgetPasswordBinding;
+import sv.com.udb.youapp.dto.Music;
+import sv.com.udb.youapp.services.ForgotPasswordService;
+import sv.com.udb.youapp.services.RetrofitFactory;
 
 public class ForgetPasswordActivity extends AppCompatActivity {
 
     private ActivityForgetPasswordBinding binding;
+    private ForgotPasswordService passService;
 
     //Animation
     Animation animation;
@@ -25,6 +36,8 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
         binding = ActivityForgetPasswordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        passService = RetrofitFactory.getInstance().create(ForgotPasswordService.class);
 
         binding.btnNext.setOnClickListener(this::btnNextListener);
 
@@ -39,7 +52,20 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     }
 
     private void btnNextListener(View view){
-        Intent i = new Intent(this, PasswordUpdateActivity.class);
-        startActivity(i);
+        Call<Void> call = passService.resetPassword(binding.email.getText().toString());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.d("Music Service","Sucess?");
+                Intent i = new Intent(ForgetPasswordActivity.this, PasswordUpdateActivity.class);
+                startActivity(i);
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 }
