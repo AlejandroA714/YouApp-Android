@@ -32,6 +32,7 @@ import sv.com.udb.youapp.auth.AuthStateManager;
 import sv.com.udb.youapp.auth.HttpConnectionBuilder;
 import sv.com.udb.youapp.auth.IAuthService;
 import sv.com.udb.youapp.auth.OAuth2AuthorizationService;
+import sv.com.udb.youapp.ui.client.RegisterActivity;
 import sv.com.udb.youapp.ui.client.home.HomeActivity;
 import sv.com.udb.youapp.ui.client.password.ForgetPasswordActivity;
 import sv.com.udb.youapp.R;
@@ -56,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         //Listener
         binding.btnOlvide.setOnClickListener(this::btnOlvideListener);
         binding.btnAccder.setOnClickListener(this::btnLogin);
+        binding.btnRegister.setOnClickListener(this::btnRegister);
         //Services
         stateManager = AuthStateManager.getInstance(this);
         oAuth2Service = new OAuth2AuthorizationService.Builder(getApplicationContext()).build();
@@ -105,5 +107,9 @@ public class LoginActivity extends AppCompatActivity {
         loginLauncher.launch(oAuth2Service.createRequestIntent());
     }
 
+    private void btnRegister(View view){
+        Intent i = new Intent(this, RegisterActivity.class);
+        startActivity(i);
+    }
 
 }
