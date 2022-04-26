@@ -23,8 +23,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import sv.com.udb.youapp.auth.AuthStateManager;
 import sv.com.udb.youapp.databinding.ActivityRegisterBinding;
+import sv.com.udb.youapp.dto.Register;
 import sv.com.udb.youapp.services.RegisterApiService;
 import sv.com.udb.youapp.services.RetrofitFactory;
+import sv.com.udb.youapp.ui.LoginActivity;
+import sv.com.udb.youapp.ui.SplashActivity;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -33,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
     private RegisterApiService service;
     private AuthStateManager authManager;
 
-    JSONObject request = new JSONObject();
+    Register request = new Register();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_register);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        service = RetrofitFactory.getInstance().create(RegisterApiService.class);
+        service = RetrofitFactory.getInstance("http://192.168.101.17:8083/").create(RegisterApiService.class);
         authManager = AuthStateManager.getInstance(getApplicationContext());
     }
 
@@ -81,19 +84,17 @@ public class RegisterActivity extends AppCompatActivity {
                 binding.email.getText().toString().isEmpty() ||
                 binding.username.getText().toString().isEmpty() ||
                 binding.pass.getText().toString().isEmpty() ||
-                binding.passConfirm.getText().toString().isEmpty() ||
-                ppBase64.isEmpty()
+                binding.passConfirm.getText().toString().isEmpty()
         ) {
             Toast.makeText(this, "Todos los campos son requeridos", Toast.LENGTH_SHORT).show();
         } else if (binding.pass.getText().toString().equals(binding.passConfirm.getText().toString())){
-            request.put("nombres", binding.name.getText().toString());
-            request.put("apellidos", binding.lastname.getText().toString());
-            request.put("email", binding.email.getText().toString());
-            request.put("username", binding.username.getText().toString());
-            request.put("password", binding.pass.getText().toString());
-            request.put("birthday", binding.birthday.getText().toString());
-            request.put("photo", ppBase64);
-            System.out.println(request);
+            request.setNombres(binding.name.getText().toString());
+            request.setApellidos(binding.lastname.getText().toString());
+            request.setEmail(binding.email.getText().toString());
+            request.setUsername(binding.username.getText().toString());
+            request.setPassword(binding.pass.getText().toString());
+            request.setBirthday(binding.birthday.getText().toString());
+            request.setPhoto(ppBase64);
 
 //            final Call<String> call = service.savePost(
 //                    binding.name.getText().toString(),
@@ -105,7 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
 //                    ppBase64
 //                    );
 
-            final Call<String> call = service.savePost(request.toString());
+            final Call<String> call = service.savePost(request);
 
             call.enqueue(new Callback<String>() {
                 @Override
@@ -114,6 +115,10 @@ public class RegisterActivity extends AppCompatActivity {
                         String music = response.body();
                         Log.d("Music Service","Sucess?");
                     }
+                    Toast.makeText(getApplicationContext(),"Registro finalizado correctamente",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
+
                 }
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
