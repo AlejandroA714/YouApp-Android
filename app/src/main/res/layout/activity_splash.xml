@@ -21,13 +21,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:fontFamily="@font/montserrat_black"
         android:lineHeight="36px"
-        android:text="@string/Title"
         android:textAlignment="center"
-        android:textColor="#ED1BA3"
-        android:textSize="24dp" />
-
+        android:textSize="24dp"
+        android:text="@string/app_name"
+        android:fontFamily="@font/montserrat_black"
+        android:textColor="#ED1BA3"/>
     <TextView
         android:id="@+id/title2"
         android:layout_width="match_parent"
