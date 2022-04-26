@@ -1,16 +1,8 @@
 package sv.com.udb.youapp.services;
 
-import android.content.Context;
-
 import androidx.annotation.AnyThread;
-import androidx.annotation.NonNull;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.lang.ref.WeakReference;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.concurrent.atomic.AtomicReference;
 
 import retrofit2.Retrofit;

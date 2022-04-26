@@ -18,6 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import sv.com.udb.youapp.R;
 import sv.com.udb.youapp.adapter.MusicAdapter;
+import sv.com.udb.youapp.adapter.PlaylistAdapter;
 import sv.com.udb.youapp.auth.AuthStateManager;
 import sv.com.udb.youapp.databinding.ActivityHomeBinding;
 import sv.com.udb.youapp.dto.Marca;
@@ -31,7 +32,8 @@ public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding binding;
     private AuthStateManager authManager;
     private MusicApiService musicApiService;
-    private MusicAdapter adapter;
+    private MusicAdapter musicAdapter;
+    private PlaylistAdapter playlistAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +43,13 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         authManager = AuthStateManager.getInstance(this);
         binding.btnLogout.setOnClickListener(this::onLogout);
-        List<Marca> marcas = new ArrayList<>();
-        marcas.add(new Marca("Playlist 1"));
-        marcas.add(new Marca("Playlist 2"));
-        marcas.add(new Marca("Playlist 3"));
-        marcas.add(new Marca("Playlist 4"));
         authManager = AuthStateManager.getInstance(getApplicationContext());
         musicApiService = RetrofitFactory.getInstance().create(MusicApiService.class);
         init();
-        adapter = new MusicAdapter(new ArrayList<>());
-        binding.rv1.setAdapter(adapter);
+        playlistAdapter = new PlaylistAdapter(new ArrayList<>());
+        musicAdapter = new MusicAdapter(new ArrayList<>());
+        binding.rv1.setAdapter(playlistAdapter);
+        binding.rv2.setAdapter(musicAdapter);
     }
 
     private void init(){
@@ -60,12 +59,14 @@ public class HomeActivity extends AppCompatActivity {
            public void onResponse(Call<List<Music>> call, Response<List<Music>> response) {
                 if(null != response.body()){
                     List<Music> music = response.body();
-                    adapter.update(music);
+                    musicAdapter.update(music);
+                    playlistAdapter.update(music);
                     Log.d("Music Service","Sucess?");
                 }
            }
            @Override
            public void onFailure(Call<List<Music>> call, Throwable t) {
+               t.printStackTrace();
                Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_LONG).show();
            }
        });
