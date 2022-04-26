@@ -10,19 +10,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitFactory {
 
-    private static final AtomicReference<WeakReference<Retrofit>> INSTANCE_REF =
-            new AtomicReference<>(new WeakReference<>(null));
+    //private static final AtomicReference<WeakReference<Retrofit>> INSTANCE_REF =
+     //       new AtomicReference<>(new WeakReference<>(null));
 
     @AnyThread
-    public static Retrofit getInstance(){
-        Retrofit retrofit = INSTANCE_REF.get().get();
-        if(retrofit == null){
+    public static Retrofit getInstance(String baseUrl){
+        //Retrofit retrofit = INSTANCE_REF.get().get();
+        //if(retrofit == null){
 
-           retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.0.24:8083/")
+           return new Retrofit.Builder()
+                    .baseUrl(baseUrl)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-        }
-        return retrofit;
+        //}
+        //return retrofit;
     }
 }

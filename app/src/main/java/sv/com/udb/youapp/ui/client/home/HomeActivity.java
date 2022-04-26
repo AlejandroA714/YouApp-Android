@@ -44,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
         authManager = AuthStateManager.getInstance(this);
         binding.btnLogout.setOnClickListener(this::onLogout);
         authManager = AuthStateManager.getInstance(getApplicationContext());
-        musicApiService = RetrofitFactory.getInstance().create(MusicApiService.class);
+        musicApiService = RetrofitFactory.getInstance("http://192.168.101.17:8085/").create(MusicApiService.class);
         init();
         playlistAdapter = new PlaylistAdapter(new ArrayList<>());
         musicAdapter = new MusicAdapter(new ArrayList<>());

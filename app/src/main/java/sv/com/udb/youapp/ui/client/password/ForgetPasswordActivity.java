@@ -37,7 +37,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         binding = ActivityForgetPasswordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        passService = RetrofitFactory.getInstance().create(ForgotPasswordService.class);
+        passService = RetrofitFactory.getInstance("http://192.168.101.17:8083/").create(ForgotPasswordService.class);
 
         binding.btnNext.setOnClickListener(this::btnNextListener);
 
