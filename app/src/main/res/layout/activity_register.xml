@@ -40,7 +40,7 @@
         android:textColor="#21DDF1"
         android:layout_marginTop="10dp"
         android:textColorHint="#21DDF1"
-        android:drawableStart="@drawable/mail"
+        android:drawableStart="@drawable/person"
         android:layout_marginRight="60dp"
         android:layout_marginLeft="60dp"
         android:drawablePadding="10dp"/>
@@ -55,7 +55,7 @@
         android:textColor="#21DDF1"
         android:layout_marginTop="10dp"
         android:textColorHint="#21DDF1"
-        android:drawableStart="@drawable/mail"
+        android:drawableStart="@drawable/person"
         android:layout_marginRight="60dp"
         android:layout_marginLeft="60dp"
         android:drawablePadding="10dp"/>
@@ -85,7 +85,7 @@
         android:textColor="#21DDF1"
         android:layout_marginTop="10dp"
         android:textColorHint="#21DDF1"
-        android:drawableStart="@drawable/mail"
+        android:drawableStart="@drawable/user"
         android:layout_marginRight="60dp"
         android:layout_marginLeft="60dp"
         android:drawablePadding="10dp"/>
@@ -95,12 +95,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/purple_500"
-        android:hint="Contraseñia"
+        android:hint="Contraseña"
         android:padding="15dp"
         android:textColor="#21DDF1"
         android:layout_marginTop="10dp"
         android:textColorHint="#21DDF1"
-        android:drawableStart="@drawable/mail"
+        android:drawableStart="@drawable/pass"
         android:layout_marginRight="60dp"
         android:layout_marginLeft="60dp"
         android:drawablePadding="10dp"/>
@@ -115,7 +115,7 @@
         android:textColor="#21DDF1"
         android:layout_marginTop="10dp"
         android:textColorHint="#21DDF1"
-        android:drawableStart="@drawable/mail"
+        android:drawableStart="@drawable/pass"
         android:layout_marginRight="60dp"
         android:layout_marginLeft="60dp"
         android:drawablePadding="10dp"/>
@@ -130,7 +130,7 @@
         android:textColor="#21DDF1"
         android:layout_marginTop="10dp"
         android:textColorHint="#21DDF1"
-        android:drawableStart="@drawable/mail"
+        android:drawableStart="@drawable/calendar"
         android:layout_marginRight="60dp"
         android:layout_marginLeft="60dp"
         android:drawablePadding="10dp"/>
@@ -139,8 +139,8 @@
         android:id="@+id/btnAccder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
         android:layout_marginTop="30dp"
         android:textColor="@color/white"
         android:background="@drawable/round_btn"
@@ -149,6 +149,7 @@
         android:text="Registrarse"
         android:textSize="20dp"
         app:strokeColor="@color/purple_500"
+        android:onClick="registerUser"
         app:strokeWidth="2dp" />
 
 
