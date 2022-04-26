@@ -3,9 +3,9 @@
     android:id="@+id/linearLayout"
     android:layout_width="153dp"
     android:layout_height="244dp"
-    android:background="#1A0938"
     android:layout_marginLeft="24dp"
-    android:layout_marginRight="18dp"
+    android:layout_marginRight="9dp"
+    android:background="#1A0938"
     android:orientation="vertical">
 
     <ImageView
