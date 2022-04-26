@@ -40,12 +40,10 @@ public final class OAuth2AuthorizationService implements IAuthService {
         authorizationService.performTokenRequest(tokenRequest,clientAuthentication,tokenResponse);
     }
 
-
     @Override
     public Intent createRequestIntent() {
         return authorizationService.getAuthorizationRequestIntent(authorizationRequest);
     }
-
 
     public static final class Builder {
         private static final String CLIENT_ID = "youapp";

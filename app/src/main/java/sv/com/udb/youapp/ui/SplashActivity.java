@@ -20,7 +20,7 @@ import sv.com.udb.youapp.ui.client.home.HomeActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static final int SPLASH_TIME_OUT = 5000;
+    private static final int SPLASH_TIME_OUT = 1000;
     private AuthStateManager authManager;
     private ActivitySplashBinding binding;
     private Animation animation;

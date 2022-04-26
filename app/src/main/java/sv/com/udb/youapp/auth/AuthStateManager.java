@@ -77,7 +77,7 @@ public class AuthStateManager {
     @NonNull
     public AuthState updateAfterAuthorization(
             @Nullable AuthorizationResponse response,
-            @org.jetbrains.annotations.Nullable AuthorizationException ex) {
+            @Nullable AuthorizationException ex) {
         AuthState current = getCurrent();
         current.update(response, ex);
         return replace(current);
