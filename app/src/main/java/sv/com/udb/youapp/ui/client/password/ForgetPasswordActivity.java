@@ -52,6 +52,10 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     }
 
     private void btnNextListener(View view){
+        if("".equals(binding.email.getText().toString())){
+            Toast.makeText(this,"Email Invalido",Toast.LENGTH_LONG).show();
+            return;
+        }
         Call<Void> call = passService.resetPassword(binding.email.getText().toString());
         call.enqueue(new Callback<Void>() {
             @Override
