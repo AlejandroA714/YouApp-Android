@@ -12,10 +12,9 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.YouApp"
-        android:usesCleartextTraffic="true">
+        android:theme="@style/Theme.YouApp">
         <activity
-            android:name=".ui.client.home.HomeActivity"
+            android:name=".ui.client.HomeActivity"
             android:exported="false" />
         <activity
             android:name=".ui.client.password.PasswordUpdateActivity"
@@ -39,15 +38,14 @@
         </activity>
         <activity
             android:name="net.openid.appauth.RedirectUriReceiverActivity"
-            android:exported="true"
-            tools:node="replace">
+            tools:node="replace"
+            android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:host="oauth"
-                    android:scheme="youapp" />
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="youapp"
+                      android:host="oauth"/>
             </intent-filter>
         </activity>
     </application>
