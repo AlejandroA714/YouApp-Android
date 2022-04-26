@@ -2,4 +2,12 @@
     <string name="app_name">YouApp</string>
     <string name="Title">YouApp</string>
     <string name="brand">The Sound of life</string>
+    <string name="welcome">Bienvenido de nuevo</string>
+    <string name="title1For">Has olvidado tu contraseña</string>
+    <string name="title2For">Provea su direccion de correo con el cual se reseteara su password</string>
+    <string name="titleUp1">Contraseña Actualizada</string>
+    <string name="titleUp2">Su contraseña ha sido actualizada revise su correo!</string>
+    <string name="top">Bienvenido</string>
+    <string name="playlist">Playlists</string>
+    <string name="list">Happy music</string>
 </resources>

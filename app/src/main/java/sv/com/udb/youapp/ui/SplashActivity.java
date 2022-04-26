@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,7 +20,7 @@ import sv.com.udb.youapp.ui.client.home.HomeActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static final int SPLASH_TIME_OUT = 5000;
+    private static final int SPLASH_TIME_OUT = 1000;
     private AuthStateManager authManager;
     private ActivitySplashBinding binding;
     private Animation animation;
@@ -41,6 +42,7 @@ public class SplashActivity extends AppCompatActivity {
             Log.d("Authorization",authState.toString());
             Intent intent;
             if(authState.isAuthorized()){
+                Toast.makeText(this,"Bienvenido!",Toast.LENGTH_LONG).show();
                 intent = new Intent(SplashActivity.this, HomeActivity.class);
             }else{
                 intent = new Intent(SplashActivity.this, LoginActivity.class);

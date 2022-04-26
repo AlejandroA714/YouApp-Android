@@ -86,7 +86,8 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }else{
-                    showToast(ex.getMessage());
+                    ex.printStackTrace();
+                    showToast("Login Failed!");
                 }
             });
         }catch (Exception e){

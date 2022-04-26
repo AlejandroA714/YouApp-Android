@@ -7,24 +7,20 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 
 import net.openid.appauth.AppAuthConfiguration;
-import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationRequest;
-import net.openid.appauth.AuthorizationResponse;
 import net.openid.appauth.AuthorizationService;
 import net.openid.appauth.AuthorizationServiceConfiguration;
 import net.openid.appauth.ClientAuthentication;
 import net.openid.appauth.ClientSecretPost;
-import net.openid.appauth.Preconditions;
 import net.openid.appauth.ResponseTypeValues;
 import net.openid.appauth.TokenRequest;
-import net.openid.appauth.TokenResponse;
 import net.openid.appauth.connectivity.ConnectionBuilder;
 
 public final class OAuth2AuthorizationService implements IAuthService {
 
-    private AuthorizationService authorizationService;
-    private AuthorizationRequest authorizationRequest;
-    private ClientAuthentication clientAuthentication;
+    private final AuthorizationService authorizationService;
+    private final AuthorizationRequest authorizationRequest;
+    private final ClientAuthentication clientAuthentication;
 
     public OAuth2AuthorizationService(AuthorizationService authorizationService,
                                       AuthorizationRequest authorizationRequest,
@@ -40,12 +36,10 @@ public final class OAuth2AuthorizationService implements IAuthService {
         authorizationService.performTokenRequest(tokenRequest,clientAuthentication,tokenResponse);
     }
 
-
     @Override
     public Intent createRequestIntent() {
         return authorizationService.getAuthorizationRequestIntent(authorizationRequest);
     }
-
 
     public static final class Builder {
         private static final String CLIENT_ID = "youapp";
