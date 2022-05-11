@@ -22,7 +22,7 @@
         app:srcCompat="@drawable/background" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/btnBack"
         android:layout_width="32dp"
         android:layout_height="33dp"
         android:layout_marginStart="101dp"
@@ -30,10 +30,10 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="30dp"
         android:background="@color/transparent"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton6"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton4"
+        app:layout_constraintBottom_toTopOf="@+id/btnLike"
+        app:layout_constraintEnd_toStartOf="@+id/btnPlay"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageButton4"
+        app:layout_constraintTop_toTopOf="@+id/btnPlay"
         app:srcCompat="@drawable/ic_skip_back" />
 
     <ProgressBar
@@ -51,51 +51,51 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/btnPlay"
         android:layout_width="64dp"
         android:layout_height="67dp"
         android:layout_marginTop="21dp"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="20dp"
         android:background="@color/transparent"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton7"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton5"
-        app:layout_constraintStart_toEndOf="@+id/imageButton3"
+        app:layout_constraintBottom_toTopOf="@+id/btnAdd"
+        app:layout_constraintEnd_toStartOf="@+id/btnForward"
+        app:layout_constraintStart_toEndOf="@+id/btnBack"
         app:layout_constraintTop_toBottomOf="@+id/progressBar"
         app:srcCompat="@drawable/ic_play" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/btnForward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:layout_marginEnd="110dp"
         android:background="@color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButton4"
+        app:layout_constraintStart_toEndOf="@+id/btnPlay"
         app:layout_constraintTop_toBottomOf="@+id/progressBar"
         app:srcCompat="@drawable/ic_skip_forward" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/btnLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@color/transparent"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton3"
+        app:layout_constraintEnd_toEndOf="@+id/btnBack"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageButton3"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton4"
+        app:layout_constraintStart_toEndOf="@+id/btnBack"
+        app:layout_constraintTop_toBottomOf="@+id/btnPlay"
         app:srcCompat="@drawable/ic_heart" />
 
     <ImageButton
-        android:id="@+id/imageButton7"
+        android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:background="@color/transparent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton5"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton5"
+        app:layout_constraintEnd_toStartOf="@+id/btnForward"
+        app:layout_constraintTop_toBottomOf="@+id/btnForward"
         app:srcCompat="@drawable/ic_add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

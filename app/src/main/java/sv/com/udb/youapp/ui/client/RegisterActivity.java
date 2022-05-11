@@ -13,8 +13,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
 import java.util.Base64;
 
@@ -24,10 +22,9 @@ import retrofit2.Response;
 import sv.com.udb.youapp.auth.AuthStateManager;
 import sv.com.udb.youapp.databinding.ActivityRegisterBinding;
 import sv.com.udb.youapp.dto.Register;
-import sv.com.udb.youapp.services.RegisterApiService;
-import sv.com.udb.youapp.services.RetrofitFactory;
+import sv.com.udb.youapp.services.api.RegisterApiService;
+import sv.com.udb.youapp.services.api.RetrofitFactory;
 import sv.com.udb.youapp.ui.LoginActivity;
-import sv.com.udb.youapp.ui.SplashActivity;
 
 public class RegisterActivity extends AppCompatActivity {
 

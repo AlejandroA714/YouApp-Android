@@ -1,4 +1,4 @@
-package sv.com.udb.youapp.services;
+package sv.com.udb.youapp.services.api;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -37,6 +37,7 @@ import sv.com.udb.youapp.ui.client.home.HomeActivity;
 import sv.com.udb.youapp.ui.client.password.ForgetPasswordActivity;
 import sv.com.udb.youapp.R;
 import sv.com.udb.youapp.databinding.ActivityLoginBinding;
+import sv.com.udb.youapp.ui.client.player.PlayerActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -82,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (null != response){
                     stateManager.updateAfterTokenResponse(response,ex);
                     showToast("Login Sucess!");
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, PlayerActivity.class);
                     startActivity(intent);
                     finish();
                 }else{
