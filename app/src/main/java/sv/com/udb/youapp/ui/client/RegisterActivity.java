@@ -96,32 +96,19 @@ public class RegisterActivity extends AppCompatActivity {
             request.setBirthday(binding.birthday.getText().toString());
             request.setPhoto(ppBase64);
 
-//            final Call<String> call = service.savePost(
-//                    binding.name.getText().toString(),
-//                    binding.lastname.getText().toString(),
-//                    binding.email.getText().toString(),
-//                    binding.username.getText().toString(),
-//                    binding.pass.getText().toString(),
-//                    binding.birthday.getText().toString(),
-//                    ppBase64
-//                    );
+            final Call<Void> call = service.savePost(request);
 
-            final Call<String> call = service.savePost(request);
-
-            call.enqueue(new Callback<String>() {
+            call.enqueue(new Callback<Void>() {
                 @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    if(null != response.body()){
-                        String music = response.body();
+                public void onResponse(Call<Void> call, Response<Void> response) {
                         Log.d("Music Service","Sucess?");
-                    }
-                    Toast.makeText(getApplicationContext(),"Registro finalizado correctamente",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                    startActivity(intent);
-
+                        Toast.makeText(getApplicationContext(),"Registro finalizado correctamente",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                        startActivity(intent);
                 }
                 @Override
-                public void onFailure(Call<String> call, Throwable t) {
+                public void onFailure(Call<Void> call, Throwable t) {
+                    t.printStackTrace();
                     Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_LONG).show();
                 }
             });
