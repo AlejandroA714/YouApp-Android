@@ -21,17 +21,16 @@ import sv.com.udb.youapp.adapter.MusicAdapter;
 import sv.com.udb.youapp.adapter.PlaylistAdapter;
 import sv.com.udb.youapp.auth.AuthStateManager;
 import sv.com.udb.youapp.databinding.ActivityHomeBinding;
-import sv.com.udb.youapp.dto.Marca;
 import sv.com.udb.youapp.dto.Music;
-import sv.com.udb.youapp.services.MusicApiService;
-import sv.com.udb.youapp.services.RetrofitFactory;
+import sv.com.udb.youapp.services.api.MusicApi;
+import sv.com.udb.youapp.services.api.RetrofitFactory;
 import sv.com.udb.youapp.ui.SplashActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
     private AuthStateManager authManager;
-    private MusicApiService musicApiService;
+    private MusicApi musicApiService;
     private MusicAdapter musicAdapter;
     private PlaylistAdapter playlistAdapter;
 
@@ -44,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
         authManager = AuthStateManager.getInstance(this);
         binding.btnLogout.setOnClickListener(this::onLogout);
         authManager = AuthStateManager.getInstance(getApplicationContext());
-        musicApiService = RetrofitFactory.getInstance("http://192.168.101.17:8085/").create(MusicApiService.class);
+        musicApiService = RetrofitFactory.getInstance("http://192.168.101.17:8085/").create(MusicApi.class);
         init();
         playlistAdapter = new PlaylistAdapter(new ArrayList<>());
         musicAdapter = new MusicAdapter(new ArrayList<>());

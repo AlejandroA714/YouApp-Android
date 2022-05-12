@@ -1,5 +1,7 @@
 package sv.com.udb.youapp.dto;
 
+import java.util.Objects;
+
 public class Music {
     private Integer              id;
     private String               title;
@@ -93,5 +95,18 @@ public class Music {
 
     public void setLikes(boolean likes) {
         this.likes = likes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Music music = (Music) o;
+        return duration == music.duration && likes == music.likes && id.equals(music.id) && title.equals(music.title) && Objects.equals(uri, music.uri) && Objects.equals(status, music.status) && Objects.equals(genre, music.genre);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, duration, uri, status, genre, likes);
     }
 }

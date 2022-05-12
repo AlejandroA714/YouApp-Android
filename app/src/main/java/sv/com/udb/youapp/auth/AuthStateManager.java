@@ -50,6 +50,14 @@ public class AuthStateManager {
         mCurrentAuthState = new AtomicReference<>();
     }
 
+    public String getAccessToken(){
+        if(mCurrentAuthState.get() != null){
+            return mCurrentAuthState.get().getAccessToken();
+        }else{
+            return null;
+        }
+    }
+
     @AnyThread
     @NonNull
     public AuthState getCurrent() {

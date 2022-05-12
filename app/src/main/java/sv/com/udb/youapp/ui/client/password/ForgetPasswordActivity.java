@@ -10,16 +10,13 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sv.com.udb.youapp.R;
 import sv.com.udb.youapp.databinding.ActivityForgetPasswordBinding;
-import sv.com.udb.youapp.dto.Music;
-import sv.com.udb.youapp.services.ForgotPasswordService;
-import sv.com.udb.youapp.services.RetrofitFactory;
+import sv.com.udb.youapp.services.api.ForgotPasswordService;
+import sv.com.udb.youapp.services.api.RetrofitFactory;
 
 public class ForgetPasswordActivity extends AppCompatActivity {
 
