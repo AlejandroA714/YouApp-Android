@@ -11,6 +11,6 @@ public class ReproductorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reproductor);
+        setContentView(R.layout.activity_player);
     }
 }
