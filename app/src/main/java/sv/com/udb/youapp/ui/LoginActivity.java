@@ -62,10 +62,20 @@ public class LoginActivity extends AppCompatActivity {
         //Services
         stateManager = AuthStateManager.getInstance(this);
         oAuth2Service = new OAuth2AuthorizationService.Builder(getApplicationContext()).build();
+        boolean sd = stateManager.getCurrent().isAuthorized();
         //ActivityResult
         loginLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 this::onLoginResult);
+        if(sd){
+            logged();
+        }
+    }
+
+    private void logged(){
+        Intent intent = new Intent(LoginActivity.this, PlayerActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void onLoginResult(ActivityResult result){
@@ -83,9 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (null != response){
                     stateManager.updateAfterTokenResponse(response,ex);
                     showToast("Login Sucess!");
-                    Intent intent = new Intent(LoginActivity.this, PlayerActivity.class);
-                    startActivity(intent);
-                    finish();
+                    logged();
                 }else{
                     ex.printStackTrace();
                     showToast("Login Failed!");

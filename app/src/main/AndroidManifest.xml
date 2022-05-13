@@ -15,10 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YouApp">
         <activity
-            android:name=".ui.client.ReproductorActivity"
-            android:exported="true" >
-        </activity>
-        <activity
             android:name=".ui.client.player.PlayerActivity"
             android:exported="true">
         </activity>

@@ -1,5 +1,7 @@
 package sv.com.udb.youapp.services;
 
+import android.media.MediaPlayer;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.function.Consumer;
@@ -19,6 +21,9 @@ public interface PlayerService {
      */
     Music init(List<Music> music) throws IOException;
 
+    /*
+    *  @param Music song that must be added
+    */
     void add(Music m);
 
     void play();
@@ -48,4 +53,6 @@ public interface PlayerService {
     int getCurrentPostion();
 
     void seekTo(int duration);
+
+    void setOnCompleteListener(MediaPlayer.OnCompletionListener listener);
 }

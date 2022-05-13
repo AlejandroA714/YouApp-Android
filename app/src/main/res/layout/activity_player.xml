@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1A0938"
-    tools:context=".ui.client.ReproductorActivity">
+    tools:context=".ui.client.player.PlayerActivity">
 
     <ImageView
         android:id="@+id/imageViewArt"
@@ -90,13 +90,14 @@
 
     <SeekBar
         android:id="@+id/seekBar"
-        android:layout_width="241dp"
+        android:layout_width="275dp"
         android:layout_height="29dp"
-        android:layout_marginStart="91dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="86dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="75dp"
         android:max="100"
         android:progress="10"
+        android:scrollbarStyle="outsideInset"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.857"
         app:layout_constraintStart_toStartOf="parent"

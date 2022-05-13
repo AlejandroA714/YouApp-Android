@@ -25,6 +25,7 @@ public class DefaultPlayerService implements PlayerService {
    private final AtomicReference<MediaPlayer> PLAYER_REF = new AtomicReference<>(null);
    private final AtomicReference<List<Music>> PLAYLIST_REF = new AtomicReference<>(new ArrayList<>());
    private final AtomicReference<Integer> INDEX_REF = new AtomicReference<>(0);
+   private MediaPlayer.OnCompletionListener onCompletionListener;
 
    @AnyThread
    public static PlayerService getInstance(){
@@ -106,6 +107,11 @@ public class DefaultPlayerService implements PlayerService {
     }
 
     @Override
+    public void setOnCompleteListener(MediaPlayer.OnCompletionListener listener) {
+        this.onCompletionListener = listener;
+    }
+
+    @Override
     public Music backward() throws UnableToPlayException{
         return _navigate(INDEX_REF.get() - 1);
     }
@@ -132,21 +138,16 @@ public class DefaultPlayerService implements PlayerService {
         player.reset();
         player.setDataSource(music.getUri());
         player.prepare();
-        player.setOnCompletionListener(this::onCompleteListener);
+        if(null != onCompletionListener){
+            player.setOnCompletionListener(this.onCompletionListener);
+        }
         player.setOnPreparedListener(this::onPreparedListener);
         return music;
     }
 
+
     private void onPreparedListener(MediaPlayer player){
         player.start();
     }
-
-    private void onCompleteListener(MediaPlayer player){
-        forward();
-    }
-
-
-
-
 
 }

@@ -60,6 +60,13 @@ public class PlayerActivity extends AppCompatActivity {
                 mHandler.postDelayed(this, 1000);
             }
         });
+        playerService.setOnCompleteListener(mp -> {
+            try{
+                updateStatus(playerService.forward());
+            }catch (UnableToPlayException e){
+                makeToast(e.getMessage());
+            }
+        });
         binding.btnPlay.setOnClickListener(this::onPlayListener);
         binding.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
