@@ -2,7 +2,6 @@ package sv.com.udb.youapp.ui.client.player;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,8 +13,6 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Observable;
-import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,8 +23,6 @@ import sv.com.udb.youapp.dto.Music;
 import sv.com.udb.youapp.exceptions.UnableToPlayException;
 import sv.com.udb.youapp.services.MusicService;
 import sv.com.udb.youapp.services.PlayerService;
-import sv.com.udb.youapp.services.api.MusicApi;
-import sv.com.udb.youapp.services.api.RetrofitFactory;
 import sv.com.udb.youapp.services.impl.DefaultMusicService;
 import sv.com.udb.youapp.services.impl.DefaultPlayerService;
 
@@ -154,7 +149,7 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     private void init(){
-        musicService.getSongsAsync().enqueue(new Callback<List<Music>>() {
+        musicService.getSongs().enqueue(new Callback<List<Music>>() {
             @Override
             public void onResponse(Call<List<Music>> call, Response<List<Music>> response) {
                 List<Music> body = response.body();

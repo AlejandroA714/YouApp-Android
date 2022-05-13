@@ -11,8 +11,8 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="186dp"
-        android:src="@drawable/background2" />
+        android:layout_height="189dp"
+        android:src="@drawable/ellipse" />
 
     <TextView
         android:id="@+id/txtTitle"
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/montserrat_semibold"
-        android:text="Happy Music"
+        android:text="Thunder"
         android:textColor="#FFFFFF"
         android:textSize="16sp" />
 
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/montserrat_medium"
-        android:text="20 songs"
+        android:text="Imagine Dragons"
         android:textColor="#A7A7A7"
         android:textSize="12sp" />
 

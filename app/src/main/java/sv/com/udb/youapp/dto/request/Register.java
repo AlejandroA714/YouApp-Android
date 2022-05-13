@@ -1,4 +1,4 @@
-package sv.com.udb.youapp.dto;
+package sv.com.udb.youapp.dto.request;
 
 public class Register {
 

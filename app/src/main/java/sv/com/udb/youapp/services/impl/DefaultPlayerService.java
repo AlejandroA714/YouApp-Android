@@ -67,7 +67,6 @@ public class DefaultPlayerService implements PlayerService {
        List<Music> music = PLAYLIST_REF.get();
        int index = music.indexOf(m); // works because equals and hashcode no includes likes field
        music.set(index,m);
-       System.out.println("dummy");
     }
 
     @Override
