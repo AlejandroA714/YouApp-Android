@@ -12,4 +12,7 @@ public interface MusicService {
 
     List<Music> getSongs() throws IOException;
 
+    Call<Void> like(int id);
+
+    Call<Void> dislike(int id);
 }

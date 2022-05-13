@@ -36,4 +36,16 @@ public class DefaultMusicService implements MusicService {
     public List<Music> getSongs() throws IOException {
        return null;
     }
+
+    @Override
+    public Call<Void> like(int id) {
+        String accessToken = authManager.getAccessToken();
+        return api.like(AUTH_TYPE + accessToken,id);
+    }
+
+    @Override
+    public Call<Void> dislike(int id) {
+        String accessToken = authManager.getAccessToken();
+        return api.dislike(AUTH_TYPE + accessToken,id);
+    }
 }
