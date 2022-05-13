@@ -22,6 +22,7 @@ import sv.com.udb.youapp.adapter.PlaylistAdapter;
 import sv.com.udb.youapp.auth.AuthStateManager;
 import sv.com.udb.youapp.databinding.ActivityHomeBinding;
 import sv.com.udb.youapp.dto.Music;
+import sv.com.udb.youapp.enums.HttpFactory;
 import sv.com.udb.youapp.services.api.MusicApi;
 import sv.com.udb.youapp.services.api.RetrofitFactory;
 import sv.com.udb.youapp.ui.SplashActivity;
@@ -43,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
         authManager = AuthStateManager.getInstance(this);
         binding.btnLogout.setOnClickListener(this::onLogout);
         authManager = AuthStateManager.getInstance(getApplicationContext());
-        musicApiService = RetrofitFactory.getInstance("http://192.168.101.17:8085/").create(MusicApi.class);
+        musicApiService = RetrofitFactory.getInstance(HttpFactory.STORAGE,MusicApi.class);
         init();
         playlistAdapter = new PlaylistAdapter(new ArrayList<>());
         musicAdapter = new MusicAdapter(new ArrayList<>());

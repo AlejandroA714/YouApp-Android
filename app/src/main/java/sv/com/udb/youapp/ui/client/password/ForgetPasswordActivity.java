@@ -15,6 +15,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import sv.com.udb.youapp.R;
 import sv.com.udb.youapp.databinding.ActivityForgetPasswordBinding;
+import sv.com.udb.youapp.enums.HttpFactory;
 import sv.com.udb.youapp.services.api.ForgotPasswordService;
 import sv.com.udb.youapp.services.api.RetrofitFactory;
 
@@ -34,7 +35,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         binding = ActivityForgetPasswordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        passService = RetrofitFactory.getInstance("http://192.168.101.17:8083/").create(ForgotPasswordService.class);
+        passService = RetrofitFactory.getInstance(HttpFactory.AUTHENTICATION,ForgotPasswordService.class);
 
         binding.btnNext.setOnClickListener(this::btnNextListener);
 
