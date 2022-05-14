@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -30,6 +31,7 @@ import sv.com.udb.youapp.enums.HttpFactory;
 import sv.com.udb.youapp.services.api.MusicApi;
 import sv.com.udb.youapp.services.api.RetrofitFactory;
 import sv.com.udb.youapp.ui.SplashActivity;
+import sv.com.udb.youapp.ui.client.HomeFragment;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -41,11 +43,20 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new HomeFragment()).commit();
+        binding.bottomNavigation.setSelectedItemId(R.id.nav_home);
+
         binding.bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fragment = null;
+                switch (item.getItemId()){
+                    case R.id.nav_home:
+                        fragment = new HomeFragment();
+                        break;
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.body_container, fragment).commit();
 
                 return true;
             }
