@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void logged(){
-        Intent intent = new Intent(LoginActivity.this, PlayerActivity.class);
+        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(intent);
         finish();
     }

@@ -9,28 +9,28 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import sv.com.udb.youapp.R;
-import sv.com.udb.youapp.databinding.AdapteMusicAltBinding;
+import sv.com.udb.youapp.databinding.AdapterMusicBinding;
 import sv.com.udb.youapp.dto.Music;
 
 public class MusicAdapter extends AbstractAdapter<Music, MusicAdapter.MusicViewHolder> {
     public MusicAdapter(List<Music> payload) {
-        super(R.layout.adapte_music_alt, payload);
+        super(R.layout.adapter_music, payload);
     }
 
     public static class MusicViewHolder extends AbstractViewHolder<Music> {
 
-        private AdapteMusicAltBinding binding;
+        private AdapterMusicBinding binding;
 
         public MusicViewHolder(@NonNull View itemView) {
             super(itemView);
-            binding = AdapteMusicAltBinding.bind(itemView);
+            binding = AdapterMusicBinding.bind(itemView);
         }
 
         @Override
         public void bind(Music payload) {
-            binding.txtTitleAlt.setText(payload.getTitle());
-            binding.txtAuthorAlt.setText(payload.getUser().getNombres());
-            Picasso.get().load(payload.getPhoto()).into(binding.imageViewAlt);
+            binding.txtTitle.setText(payload.getTitle());
+            binding.txtAuthor.setText(payload.getUser().getNombres());
+            Picasso.get().load(payload.getPhoto()).into(binding.imageView);
         }
     }
 

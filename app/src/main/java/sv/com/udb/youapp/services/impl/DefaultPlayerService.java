@@ -63,6 +63,13 @@ public class DefaultPlayerService implements PlayerService {
     }
 
     @Override
+    public void update(Music m) {
+       List<Music> music = PLAYLIST_REF.get();
+       int index = music.indexOf(m); // works because equals and hashcode no includes likes field
+       music.set(index,m);
+    }
+
+    @Override
     public void play() {
         PLAYER_REF.get().start();
     }
@@ -143,6 +150,14 @@ public class DefaultPlayerService implements PlayerService {
         }
         player.setOnPreparedListener(this::onPreparedListener);
         return music;
+    }
+
+    public String secondsToMMSS(int duration){
+        final int m = (int) Math.floor((duration % 3600) / 60);
+        final int s = (int) Math.floor((duration % 3600) % 60);
+        final String mins = m > 0 ? (m < 10 ? "0" + m + ":" : m + ":") : "00:";
+        final String secnds = s > 0 ? (s < 10 ? "0" + s : String.valueOf(s)) : "00";
+        return mins+secnds;
     }
 
 

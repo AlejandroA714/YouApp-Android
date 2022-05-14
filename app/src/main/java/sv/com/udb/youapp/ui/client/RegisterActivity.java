@@ -21,7 +21,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import sv.com.udb.youapp.auth.AuthStateManager;
 import sv.com.udb.youapp.databinding.ActivityRegisterBinding;
-import sv.com.udb.youapp.dto.Register;
+import sv.com.udb.youapp.dto.request.Register;
 import sv.com.udb.youapp.enums.HttpFactory;
 import sv.com.udb.youapp.services.api.RegisterApiService;
 import sv.com.udb.youapp.services.api.RetrofitFactory;

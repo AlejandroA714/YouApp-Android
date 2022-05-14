@@ -89,7 +89,7 @@ public class Music {
         this.user = user;
     }
 
-    public boolean isLikes() {
+    public boolean likes() {
         return likes;
     }
 
@@ -102,11 +102,11 @@ public class Music {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Music music = (Music) o;
-        return duration == music.duration && likes == music.likes && id.equals(music.id) && title.equals(music.title) && Objects.equals(uri, music.uri) && Objects.equals(status, music.status) && Objects.equals(genre, music.genre);
+        return duration == music.duration && id.equals(music.id) && title.equals(music.title) && Objects.equals(uri, music.uri) && Objects.equals(status, music.status) && Objects.equals(genre, music.genre);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, duration, uri, status, genre, likes);
+        return Objects.hash(id, title, duration, uri, status, genre);
     }
 }

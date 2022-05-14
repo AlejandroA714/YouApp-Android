@@ -26,6 +26,8 @@ public interface PlayerService {
     */
     void add(Music m);
 
+    void update(Music m);
+
     void play();
 
     void pause();
@@ -55,4 +57,6 @@ public interface PlayerService {
     void seekTo(int duration);
 
     void setOnCompleteListener(MediaPlayer.OnCompletionListener listener);
+
+    String secondsToMMSS(int duration);
 }
