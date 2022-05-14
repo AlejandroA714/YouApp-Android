@@ -10,7 +10,7 @@ android {
                 'appAuthRedirectScheme': 'youapp'
         ]
         applicationId "sv.com.udb.youapp"
-        minSdk 22
+        minSdk 23
         targetSdk 30
         versionCode 1
         versionName "1.0"
@@ -49,6 +49,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.3.2'
+    implementation 'com.github.ismaeldivita:chip-navigation-bar:1.3.2'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.4.32'
 }
