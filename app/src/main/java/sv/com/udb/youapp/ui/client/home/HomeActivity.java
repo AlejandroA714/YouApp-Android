@@ -3,10 +3,14 @@ package sv.com.udb.youapp.ui.client.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.openid.appauth.AuthState;
 
@@ -30,10 +34,6 @@ import sv.com.udb.youapp.ui.SplashActivity;
 public class HomeActivity extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
-    private AuthStateManager authManager;
-    private MusicApi musicApiService;
-    private MusicAdapter musicAdapter;
-    private PlaylistAdapter playlistAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,41 +41,14 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        authManager = AuthStateManager.getInstance(this);
-        binding.btnLogout.setOnClickListener(this::onLogout);
-        authManager = AuthStateManager.getInstance(getApplicationContext());
-        musicApiService = RetrofitFactory.getInstance(HttpFactory.STORAGE,MusicApi.class);
-        init();
-        playlistAdapter = new PlaylistAdapter(new ArrayList<>());
-        musicAdapter = new MusicAdapter(new ArrayList<>());
-        binding.rv1.setAdapter(playlistAdapter);
-        binding.rv2.setAdapter(musicAdapter);
-    }
+        binding.bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-    private void init(){
-       final Call<List<Music>> call = musicApiService.getSongs("Bearer " + authManager.getCurrent().getAccessToken());
-       call.enqueue(new Callback<List<Music>>() {
-           @Override
-           public void onResponse(Call<List<Music>> call, Response<List<Music>> response) {
-                if(null != response.body()){
-                    List<Music> music = response.body();
-                    musicAdapter.update(music);
-                    playlistAdapter.update(music);
-                    Log.d("Music Service","Sucess?");
-                }
-           }
-           @Override
-           public void onFailure(Call<List<Music>> call, Throwable t) {
-               t.printStackTrace();
-               Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_LONG).show();
-           }
-       });
-    }
 
-    private void onLogout(View view){
-        authManager.replace(new AuthState());
-        Intent intent = new Intent(HomeActivity.this,SplashActivity.class);
-        startActivity(intent);
-        finish();
+
+                return true;
+            }
+        });
     }
 }
