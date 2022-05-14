@@ -16,7 +16,7 @@ import net.openid.appauth.AuthState;
 import sv.com.udb.youapp.R;
 import sv.com.udb.youapp.auth.AuthStateManager;
 import sv.com.udb.youapp.databinding.ActivitySplashBinding;
-import sv.com.udb.youapp.ui.client.home.HomeActivity;
+import sv.com.udb.youapp.ui.client.home.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -43,7 +43,7 @@ public class SplashActivity extends AppCompatActivity {
             Intent intent;
             if(authState.isAuthorized()){
                 Toast.makeText(this,"Bienvenido!",Toast.LENGTH_LONG).show();
-                intent = new Intent(SplashActivity.this, HomeActivity.class);
+                intent = new Intent(SplashActivity.this, MainActivity.class);
             }else{
                 intent = new Intent(SplashActivity.this, LoginActivity.class);
             }
