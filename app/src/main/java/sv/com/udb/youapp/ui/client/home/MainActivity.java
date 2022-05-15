@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import sv.com.udb.youapp.R;
 import sv.com.udb.youapp.databinding.ActivityHomeBinding;
 import sv.com.udb.youapp.ui.client.HomeFragment;
+import sv.com.udb.youapp.ui.client.like.LikeFragment;
 import sv.com.udb.youapp.ui.client.player.PlayerFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.nav_player:
                     fragment = new PlayerFragment();
+                    break;
+                case R.id.nav_library:
+                    fragment = new LikeFragment();
                     break;
                 default:
                     fragment = new HomeFragment();

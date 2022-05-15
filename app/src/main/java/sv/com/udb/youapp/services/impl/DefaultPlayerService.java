@@ -15,6 +15,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import sv.com.udb.youapp.dto.Music;
+import sv.com.udb.youapp.exceptions.SongAlreadyOnQueueException;
 import sv.com.udb.youapp.exceptions.UnableToPlayException;
 import sv.com.udb.youapp.services.PlayerService;
 
@@ -62,8 +63,33 @@ public class DefaultPlayerService implements PlayerService {
         }
     }
 
-    public void add(Music music){
-        this.PLAYLIST_REF.get().add(music);
+    public void add(Music music) throws IOException {
+       try{
+           MediaPlayer player = PLAYER_REF.get();
+           List<Music> songs = this.PLAYLIST_REF.get();
+           if(songs.contains(music)){
+               throw new SongAlreadyOnQueueException("Song is already on queue");
+           }
+           songs.add(music);
+           this.PLAYLIST_REF.set(songs);
+            if(!player.isPlaying()){
+                _prepare(music);
+                play();
+            }
+       }catch (Exception e){
+           e.printStackTrace();
+           throw e;
+       }
+    }
+
+    @Override
+    public void add(List<Music> m) throws IOException, SongAlreadyOnQueueException {
+        if(m.size() <= 0){
+            throw new RuntimeException("No songs to be added");
+        }
+        this.PLAYLIST_REF.set(m);
+        _prepare(m.get(0));
+        play();
     }
 
     @Override

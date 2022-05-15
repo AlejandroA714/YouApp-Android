@@ -11,6 +11,10 @@ public class Playlist {
     public Playlist() {
     }
 
+    public Playlist(String title) {
+        this.title = title;
+    }
+
     public Playlist(int id, String title, YouAppPrincipal user, List<Music> songs) {
         this.id = id;
         this.title = title;

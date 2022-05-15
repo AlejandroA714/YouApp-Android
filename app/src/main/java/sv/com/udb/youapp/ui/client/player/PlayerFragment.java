@@ -1,10 +1,12 @@
 package sv.com.udb.youapp.ui.client.player;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -19,13 +21,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sv.com.udb.youapp.R;
+import sv.com.udb.youapp.adapter.PlaylistItemAdapter;
+import sv.com.udb.youapp.databinding.DialogCreatePlaylistBinding;
+import sv.com.udb.youapp.databinding.DialogSelectPlaylistBinding;
 import sv.com.udb.youapp.databinding.FragmentPlayerBinding;
 import sv.com.udb.youapp.dto.Music;
+import sv.com.udb.youapp.dto.Playlist;
 import sv.com.udb.youapp.exceptions.UnableToPlayException;
 import sv.com.udb.youapp.services.MusicService;
 import sv.com.udb.youapp.services.PlayerService;
 import sv.com.udb.youapp.services.impl.DefaultMusicService;
 import sv.com.udb.youapp.services.impl.DefaultPlayerService;
+import sv.com.udb.youapp.ui.dialog.PlaylistItemDialog;
 
 public class PlayerFragment extends Fragment {
 
@@ -35,13 +42,11 @@ public class PlayerFragment extends Fragment {
     private Handler mHandler = new Handler();
 
     public PlayerFragment(){
-
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Toast.makeText(getActivity(), "PlayerFragment on create", Toast.LENGTH_SHORT).show();
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -50,9 +55,7 @@ public class PlayerFragment extends Fragment {
         binding = FragmentPlayerBinding.inflate(inflater,container,false);
         musicService = new DefaultMusicService(getContext());
         playerService = DefaultPlayerService.getInstance();
-        if(!playerService.isPlaying()){
-            init();
-        }else {
+        if(playerService.isPlaying()) {
             updateStatus(playerService.get());
             if(playerService.isPlaying()){
                 binding.btnPlay.setImageResource(R.drawable.ic_pause);
@@ -60,9 +63,9 @@ public class PlayerFragment extends Fragment {
                 playerService.play();
                 binding.btnPlay.setImageResource(R.drawable.ic_play);
             }
+        }else {
+            Toast.makeText(getContext(), "No song has been selected", Toast.LENGTH_SHORT).show();
         }
-
-        Toast.makeText(getActivity(), "PlayerFragment create View", Toast.LENGTH_SHORT).show();
         getActivity().runOnUiThread(new Runnable(){
             @Override
             public void run() {
@@ -81,6 +84,7 @@ public class PlayerFragment extends Fragment {
         });
         binding.btnLove.setOnClickListener(this::onLoveListener);
         binding.btnPlay.setOnClickListener(this::onPlayListener);
+        binding.btnPlaylist.setOnClickListener(this::showPlaylistDialog);
         binding.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -170,28 +174,17 @@ public class PlayerFragment extends Fragment {
         };
     }
 
-    private void init(){
-        musicService.getSongs().enqueue(new Callback<List<Music>>() {
-            @Override
-            public void onResponse(Call<List<Music>> call, Response<List<Music>> response) {
-                List<Music> body = response.body();
-                if(null != body){
-                    try {
-                        playerService.init(body);
-                        updateStatus(body.get(0));
-                        binding.btnPlay.setImageResource(R.drawable.ic_pause);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    Toast.makeText(getActivity(), "Ready!", Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<List<Music>> call, Throwable t) {
-                t.printStackTrace();
-                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
-            }
-        });
+    private void showPlaylistDialog(View view){
+        if(playerService.isPlaying()){
+            new PlaylistItemDialog(playerService.get()).show(
+                    getChildFragmentManager(),"TAG?");
+        }else {
+            Toast.makeText(getContext(), "Not playing anything", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void addToPlaylist(Playlist p){
+
     }
 
 
