@@ -4,12 +4,12 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import sv.com.udb.youapp.dto.Song;
 import sv.com.udb.youapp.dto.request.Register;
 
-public interface RegisterApiService {
+public interface UploadSong {
 
-    @POST("v1/auth/register")
+    @POST("v1/storage/upload")
     @Headers("Content-type: application/json")
-    Call<Void> savePost(@Body Register body);
-
+    Call<Void> uploadSong(@Body Song body);
 }

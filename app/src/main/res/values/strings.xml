@@ -8,6 +8,10 @@
     <string name="titleUp1">Contraseña Actualizada</string>
     <string name="titleUp2">Su contraseña ha sido actualizada revise su correo!</string>
     <string name="top">Bienvenido</string>
+    <string name="upload">Subir canciones</string>
+    <string name="upload_text">Sube tu cancion aquí</string>
+    <string name="upload_name">Nombre de la cancion</string>
+    <string name="upload_genre">Genero</string>
     <string name="playlist">Playlists</string>
     <string name="list">Happy music</string>
     <!-- TODO: Remove or change this placeholder text -->

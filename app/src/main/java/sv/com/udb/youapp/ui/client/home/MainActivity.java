@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import sv.com.udb.youapp.R;
 import sv.com.udb.youapp.databinding.ActivityHomeBinding;
 import sv.com.udb.youapp.ui.client.HomeFragment;
+import sv.com.udb.youapp.ui.client.upload.UploadFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new HomeFragment();
                     break;
                 default:
-                    fragment = new HomeFragment();
+                    fragment = new UploadFragment();
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.body_container, fragment).commit();

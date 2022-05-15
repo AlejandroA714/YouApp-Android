@@ -110,7 +110,7 @@ import sv.com.udb.youapp.ui.SplashActivity;
              @Override
              public void onFailure(Call<List<Music>> call, Throwable t) {
                  t.printStackTrace();
-                 Toast.makeText(getContext(),"Failed to recover songs",Toast.LENGTH_LONG).show();
+                 //Toast.makeText(getContext().getApplicationContext(),"Failed to recover songs",Toast.LENGTH_LONG).show();
              }
          });
      }
@@ -128,7 +128,7 @@ import sv.com.udb.youapp.ui.SplashActivity;
              @Override
              public void onFailure(Call<List<Playlist>> call, Throwable t) {
                  t.printStackTrace();
-                 Toast.makeText(getActivity(), "Failed to recover playlist", Toast.LENGTH_SHORT).show();
+                 //Toast.makeText(getActivity(), "Failed to recover playlist", Toast.LENGTH_SHORT).show();
              }
          });
      }
