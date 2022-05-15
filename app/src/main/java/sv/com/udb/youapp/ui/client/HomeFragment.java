@@ -90,7 +90,7 @@ public class HomeFragment extends Fragment {
     private void onMusicLister(Music m){
         try {
             playerService.add(m);
-                Toast.makeText(getContext(), m.getTitle() + " is now on queue", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), m.getTitle() + " is now on queue", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(getContext(), "Failed to play this song", Toast.LENGTH_SHORT).show();

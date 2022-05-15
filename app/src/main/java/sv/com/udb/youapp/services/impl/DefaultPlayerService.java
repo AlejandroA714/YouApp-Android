@@ -72,10 +72,10 @@ public class DefaultPlayerService implements PlayerService {
            }
            songs.add(music);
            this.PLAYLIST_REF.set(songs);
-            if(!player.isPlaying()){
-                _prepare(music);
-                play();
-            }
+            //if(!player.isPlaying()){
+            _prepare(music);
+            play();
+           // }
        }catch (Exception e){
            e.printStackTrace();
            throw e;
@@ -162,7 +162,7 @@ public class DefaultPlayerService implements PlayerService {
         try{
             Music next = PLAYLIST_REF.get().get(index);
             _prepare(next);
-            INDEX_REF.set(index);
+            //INDEX_REF.set(index);
             return next;
         }catch (IndexOutOfBoundsException | IllegalStateException | IOException ex){
             ex.printStackTrace();
@@ -175,6 +175,8 @@ public class DefaultPlayerService implements PlayerService {
         player.reset();
         player.setDataSource(music.getUri());
         player.prepare();
+        int index = PLAYLIST_REF.get().indexOf(music);
+        INDEX_REF.set(index);
         if(null != onCompletionListener){
             player.setOnCompletionListener(this.onCompletionListener);
         }

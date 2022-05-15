@@ -55,8 +55,8 @@ public class PlayerFragment extends Fragment {
         binding = FragmentPlayerBinding.inflate(inflater,container,false);
         musicService = new DefaultMusicService(getContext());
         playerService = DefaultPlayerService.getInstance();
+        updateStatus(playerService.get());
         if(playerService.isPlaying()) {
-            updateStatus(playerService.get());
             if(playerService.isPlaying()){
                 binding.btnPlay.setImageResource(R.drawable.ic_pause);
             }else{
