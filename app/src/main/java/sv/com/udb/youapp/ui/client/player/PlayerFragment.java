@@ -148,6 +148,10 @@ public class PlayerFragment extends Fragment {
 
     private void onLoveListener(View view){
         Music m = playerService.get();
+        if(null == m){
+            Toast.makeText(getContext(), "No currenly playing", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if(m.likes()){
             musicService.dislike(m.getId()).enqueue(this.onLikeResult(m));
         }else{
