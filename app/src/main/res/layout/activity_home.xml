@@ -23,6 +23,7 @@
         app:itemIconSize="30dp"
         app:itemIconTint="@drawable/item_selector"
         app:labelVisibilityMode="selected"
+        app:itemTextColor="@color/purple_500"
         app:menu="@menu/item_menu" />
 
 </RelativeLayout>
