@@ -11,6 +11,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import sv.com.udb.youapp.dto.Music;
 import sv.com.udb.youapp.dto.Playlist;
+import sv.com.udb.youapp.dto.request.AddToPlaylist;
 import sv.com.udb.youapp.dto.request.CreatePlaylist;
 
 public interface MusicApi {
@@ -33,5 +34,11 @@ public interface MusicApi {
     @POST("v1/storage/music/playlist/add")
     @Headers("Content-type: application/json")
     Call<Playlist> createPlaylist(@Header(AUTHORIZATION) String authHeader,@Body CreatePlaylist body);
+
+    @GET("v1/storage/music/favorites")
+    Call<List<Music>> getFavorities(@Header(AUTHORIZATION) String authHeader);
+
+    @POST("v1/storage/music/playlist")
+    Call<Void> addToPlaylist(@Header(AUTHORIZATION)String authHeader,@Body AddToPlaylist playlist);
 
 }

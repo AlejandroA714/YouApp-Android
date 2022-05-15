@@ -9,6 +9,8 @@ import sv.com.udb.youapp.R;
 import sv.com.udb.youapp.databinding.ActivityHomeBinding;
 import sv.com.udb.youapp.ui.client.HomeFragment;
 import sv.com.udb.youapp.ui.client.upload.UploadFragment;
+import sv.com.udb.youapp.ui.client.like.LikeFragment;
+import sv.com.udb.youapp.ui.client.player.PlayerFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,10 +27,16 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavigation.setSelectedItemId(R.id.nav_home);
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener(item -> {
-            Fragment fragment = null;
+            Fragment fragment;
             switch (item.getItemId()){
                 case R.id.nav_home:
                     fragment = new HomeFragment();
+                    break;
+                case R.id.nav_player:
+                    fragment = new PlayerFragment();
+                    break;
+                case R.id.nav_library:
+                    fragment = new LikeFragment();
                     break;
                 default:
                     fragment = new UploadFragment();

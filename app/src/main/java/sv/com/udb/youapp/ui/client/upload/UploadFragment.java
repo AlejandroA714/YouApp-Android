@@ -79,13 +79,14 @@ public class UploadFragment extends AppCompatDialogFragment {
 
     private void uploadSong(View view) {
         if (binding.name.getText().toString().isEmpty() ||
-                binding.genre.getText().toString().isEmpty()
+                binding.genre.getText().toString().isEmpty() ||
+                request.getFile() == null
         ) {
             Toast.makeText(getContext().getApplicationContext(), "Todos los campos son requeridos", Toast.LENGTH_SHORT).show();
         } else {
 
-            request.setTitle("Titulo");
-            request.setGenreId("1");
+            request.setTitle(binding.name.getText().toString());
+            request.setGenreId(binding.genre.getText().toString());
 
             final Call<Void> call = service.uploadSong(request);
             call.enqueue(new Callback<Void>() {

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import net.openid.appauth.AuthState;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +29,23 @@ import sv.com.udb.youapp.databinding.DialogCreatePlaylistBinding;
 import sv.com.udb.youapp.databinding.FragmentHomeBinding;
 import sv.com.udb.youapp.dto.Music;
 import sv.com.udb.youapp.dto.Playlist;
+import sv.com.udb.youapp.exceptions.SongAlreadyOnQueueException;
+import sv.com.udb.youapp.interfaces.OnItemClickListener;
 import sv.com.udb.youapp.services.MusicService;
+import sv.com.udb.youapp.services.PlayerService;
 import sv.com.udb.youapp.services.impl.DefaultMusicService;
+import sv.com.udb.youapp.services.impl.DefaultPlayerService;
 import sv.com.udb.youapp.ui.SplashActivity;
+import sv.com.udb.youapp.ui.client.player.PlayerFragment;
 
- public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment {
+
+    private FragmentHomeBinding binding;
+    private AuthStateManager authManager;
+    private MusicService musicService;
+    private MusicAdapter musicAdapter;
+    private PlaylistAdapter playlistAdapter;
+    private PlayerService playerService;
 
     public HomeFragment() {
     }
@@ -41,12 +54,6 @@ import sv.com.udb.youapp.ui.SplashActivity;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-     private FragmentHomeBinding binding;
-     private AuthStateManager authManager;
-     private MusicService musicService;
-     private MusicAdapter musicAdapter;
-     private PlaylistAdapter playlistAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,13 +65,38 @@ import sv.com.udb.youapp.ui.SplashActivity;
         binding.btnLogout.setOnClickListener(this::onLogout);
         authManager = AuthStateManager.getInstance(getContext());
         musicService = new DefaultMusicService(getContext());
+        playerService = DefaultPlayerService.getInstance();
         init();
-        playlistAdapter = new PlaylistAdapter(new ArrayList<>());
-        musicAdapter = new MusicAdapter(new ArrayList<>());
-        binding.rv1.setAdapter(playlistAdapter);
-        binding.rv2.setAdapter(musicAdapter);
+        playlistAdapter = new PlaylistAdapter(new ArrayList<>(),this::onPlaylistListener);
+        musicAdapter = new MusicAdapter(new ArrayList<>(),this::onMusicLister);
+        binding.rv1.setAdapter(musicAdapter);
+        binding.rv2.setAdapter(playlistAdapter);
         binding.btnCreatePy.setOnClickListener(this::showPlaylistDialog);
         return binding.getRoot();
+    }
+
+    private void onPlaylistListener(Playlist p){
+        try{
+            playerService.add(p.getSongs());
+            Toast.makeText(getContext(), p.getTitle() + " songs has been added", Toast.LENGTH_SHORT).show();
+        }catch (IOException e){
+            e.printStackTrace();
+            Toast.makeText(getContext(), "Failed to play this song", Toast.LENGTH_SHORT).show();
+        }catch (RuntimeException e){
+            Toast.makeText(getContext(), "Playlist is empty", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void onMusicLister(Music m){
+        try {
+            playerService.add(m);
+                Toast.makeText(getContext(), m.getTitle() + " is now on queue", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), "Failed to play this song", Toast.LENGTH_SHORT).show();
+        } catch (SongAlreadyOnQueueException e){
+            Toast.makeText(getContext(), m.getTitle() + " is already on queue", Toast.LENGTH_SHORT).show();
+        }
     }
 
      private void showPlaylistDialog(View view){

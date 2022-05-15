@@ -18,4 +18,8 @@ public interface MusicService {
     Call<Void> dislike(int id);
 
     Call<Playlist> createPlaylist(String title);
+
+    Call<List<Music>> getFavorities();
+
+    Call<Void> addToPlaylist(int musicId,int playlistId);
 }

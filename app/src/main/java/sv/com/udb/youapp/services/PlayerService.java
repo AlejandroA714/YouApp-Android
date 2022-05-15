@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import sv.com.udb.youapp.dto.Music;
+import sv.com.udb.youapp.exceptions.SongAlreadyOnQueueException;
 import sv.com.udb.youapp.exceptions.UnableToPlayException;
 
 public interface PlayerService {
@@ -24,7 +25,9 @@ public interface PlayerService {
     /*
     *  @param Music song that must be added
     */
-    void add(Music m);
+    void add(Music m) throws IOException, SongAlreadyOnQueueException;
+
+    void add(List<Music> m) throws IOException, SongAlreadyOnQueueException;
 
     void update(Music m);
 

@@ -102,11 +102,11 @@ public class Music {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Music music = (Music) o;
-        return duration == music.duration && id.equals(music.id) && title.equals(music.title) && Objects.equals(uri, music.uri) && Objects.equals(status, music.status) && Objects.equals(genre, music.genre);
+        return id.equals(music.id) && title.equals(music.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, duration, uri, status, genre);
+        return Objects.hash(id, title);
     }
 }
