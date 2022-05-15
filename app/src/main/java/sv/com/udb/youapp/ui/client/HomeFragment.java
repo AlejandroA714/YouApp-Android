@@ -61,8 +61,8 @@ import sv.com.udb.youapp.ui.SplashActivity;
         init();
         playlistAdapter = new PlaylistAdapter(new ArrayList<>());
         musicAdapter = new MusicAdapter(new ArrayList<>());
-        binding.rv1.setAdapter(playlistAdapter);
-        binding.rv2.setAdapter(musicAdapter);
+        binding.rv1.setAdapter(musicAdapter);
+        binding.rv2.setAdapter(playlistAdapter);
         binding.btnCreatePy.setOnClickListener(this::showPlaylistDialog);
         return binding.getRoot();
     }

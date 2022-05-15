@@ -44,7 +44,11 @@ public class DefaultPlayerService implements PlayerService {
 
     @Override
     public Music get() {
-        return PLAYLIST_REF.get().get(INDEX_REF.get());
+       if(isPlaying()){
+           return PLAYLIST_REF.get().get(INDEX_REF.get());
+       }else {
+           return null;
+       }
     }
 
     @Override

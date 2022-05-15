@@ -1,13 +1,14 @@
 package sv.com.udb.youapp.ui.client.player;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
 
@@ -18,7 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sv.com.udb.youapp.R;
-import sv.com.udb.youapp.databinding.ActivityPlayerBinding;
+import sv.com.udb.youapp.databinding.FragmentPlayerBinding;
 import sv.com.udb.youapp.dto.Music;
 import sv.com.udb.youapp.exceptions.UnableToPlayException;
 import sv.com.udb.youapp.services.MusicService;
@@ -26,27 +27,43 @@ import sv.com.udb.youapp.services.PlayerService;
 import sv.com.udb.youapp.services.impl.DefaultMusicService;
 import sv.com.udb.youapp.services.impl.DefaultPlayerService;
 
-public class PlayerActivity extends AppCompatActivity {
+public class PlayerFragment extends Fragment {
 
-    private MediaPlayer mediaPlayer;
     private MusicService musicService;
-    private ActivityPlayerBinding binding;
-    private List<Music> music;
+    private FragmentPlayerBinding binding;
     private PlayerService playerService;
     private Handler mHandler = new Handler();
 
+    public PlayerFragment(){
+
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_player);
-        //binding
-        binding = ActivityPlayerBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        //Services
-        musicService = new DefaultMusicService(getApplicationContext());
+        Toast.makeText(getActivity(), "PlayerFragment on create", Toast.LENGTH_SHORT).show();
+    }
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        inflater.inflate(R.layout.fragment_player,container,false);
+        binding = FragmentPlayerBinding.inflate(inflater,container,false);
+        musicService = new DefaultMusicService(getContext());
         playerService = DefaultPlayerService.getInstance();
-        init();
-        PlayerActivity.this.runOnUiThread(new Runnable(){
+        if(!playerService.isPlaying()){
+            init();
+        }else {
+            updateStatus(playerService.get());
+            if(playerService.isPlaying()){
+                binding.btnPlay.setImageResource(R.drawable.ic_pause);
+            }else{
+                playerService.play();
+                binding.btnPlay.setImageResource(R.drawable.ic_play);
+            }
+        }
+
+        Toast.makeText(getActivity(), "PlayerFragment create View", Toast.LENGTH_SHORT).show();
+        getActivity().runOnUiThread(new Runnable(){
             @Override
             public void run() {
                     int mCurrentPosition = playerService.getCurrentPostion() / 1000;
@@ -92,12 +109,17 @@ public class PlayerActivity extends AppCompatActivity {
                makeToast(e.getMessage());
            }
         });
+        return binding.getRoot();
     }
 
     private void makeToast(String message){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
     private void updateStatus(Music m){
+        if(null == m){
+            Toast.makeText(getActivity(), "No curreting playing", Toast.LENGTH_SHORT).show();
+            return;
+        }
         Picasso.get().load(m.getPhoto()).into(binding.imageViewArt);
         binding.txtPlayerTitle.setText(m.getTitle());
         binding.txtPlayerAuthor.setText(m.getUser().getUsername());
@@ -161,13 +183,13 @@ public class PlayerActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    Toast.makeText(PlayerActivity.this, "Ready!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Ready!", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<List<Music>> call, Throwable t) {
                 t.printStackTrace();
-                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
     }
